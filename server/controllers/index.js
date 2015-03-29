@@ -1,32 +1,52 @@
 var models = require('../models');
 var bluebird = require('bluebird');
 
-var messageParams = ['username', 'message', 'roomname'];
+var messageParams = ['message', 'username', 'roomname'];
 var userParams = ['username'];
+var roomParams = ['roomname'];
 
 module.exports = {
   messages: {
     get: function (req, res) {
+      console.log("controllers get");
       models.messages.get(function(result){
+        console.log(result);
         res.send(result);
-      })
-    }, // a function which handles a get request for all messages
+      });
+    },
     post: function (req, res) {
-      models.messages.post(messageParams, req.bodyfunction(){
+      var params = [req.body.message, req.body.username, req.body.roomname];
+      models.messages.post(params, function(){
         res.sendStatus(201);
-      })
-    } // a function which handles posting a message to the database
+      });
+    }
   },
 
   users: {
-    // Ditto as above
     get: function (req, res) {
-      models.users.get(req.body.username, function(result){
+       console.log("models get 25");
+      models.users.get(function(result){
+        res.send(result);
+      });
+    },
+    post: function (req, res) {
+      var params = [req.body.username];
+      models.users.post(params, function(){
+        res.sendStatus(201);
+      })
+    }
+  },
+
+  rooms: {
+    get: function (req, res) {
+      console.log("models get 38");
+      models.rooms.get(function(result){
         res.send(result);
       })
     },
     post: function (req, res) {
-      models.users.get(userParams, function(){
+      var params = [req.body.roomname];
+      models.rooms.post(params, function(){
         res.sendStatus(201);
       })
     }

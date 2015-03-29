@@ -19,9 +19,9 @@ DROP TABLE IF EXISTS `Messages`;
 
 CREATE TABLE `Messages` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `text` MEDIUMTEXT NOT NULL,
-  `userid` INTEGER NOT NULL,
-  `roomid` INTEGER NOT NULL,
+  `text` MEDIUMTEXT,
+  `userid` INTEGER,
+  `roomid` INTEGER,
   PRIMARY KEY (`id`)
 );
 
